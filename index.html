@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>叶姥姥浏览器</title>
+		<style>
+			/* 设置字体为 Arial，次要样式设置为居中、没有边距 */
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+			}
+
+			/* 设置容器元素的样式，使其垂直居中和显示内联元素 */
+			.container {
+				flex-direction: column;
+				align-items: center;
+			}
+
+			/* 设置输入框的样式，包括宽度、内边距和边框 */
+			input[type="text"] {
+				width: 50%;
+				padding: 10px;
+				margin-bottom: 10px;
+			}
+
+			/* 设置 iframe 的样式，包括宽度、高度和边框 */
+			iframe {
+				width: 100%;
+				height: 1000px;
+				border: 0;
+			}
+
+			/* 设置进度条的样式，包括宽度 */
+			progress {
+				width: 50%;
+				/* 添加自定义样式 */
+				background-color: #f3f3f3;
+				border-radius: 5px;
+				height: 10px;
+				margin-bottom: 10px;
+			}
+
+
+			/* 设置进度条未加载时的样式，隐藏进度条 */
+			progress:not(:active) {
+				display: none;
+			}
+
+			.progress-bar {
+				background-color: #f3f3f3;
+				border-radius: 5px;
+				height: 10px;
+			}
+			
+			/* 设置疑问按钮的样式 */
+			.question-button {
+			            position: fixed;
+			            top: 3px;
+			            right: 3px;
+			            width: 30px;
+			            height: 30px;
+			            background-color: gray;
+			            border-radius: 50%;
+			            cursor: pointer;
+			        }
+			
+			.question-button span {
+			            margin-top: 1px;
+			            margin-left: 6px;
+			}
+					
+		</style>
+		<progress class="progress-bar" value="0" max="100"></progress>
+	</head>
+	<body>
+		<!-- 设置容器元素，包含输入框、按钮和进度条以及 iframe -->
+		<div class="container">
+			<input type="text" id="urlInput" placeholder="请输入网址......" />
+			<button onclick="loadIframe()">打开网站</button>
+			<progress id="progressBar" value="0" max="100"></progress>
+			<iframe id="contentFrame" src="" onload="progressBar.style.display = 'none';"></iframe>
+		</div>
+		
+		<!-- 设置一个圆形疑问按钮在画面右上角 -->
+		<div class="question-button" onclick="alert('当按下打开网站按钮后，下方会出现一条灰色的东西，当这条东西消失，代表网站加载完毕。如果页面加载不出来，请检查输入的网址是否正确。目前应该是只支持手机端网站。')"><span>🤔</span></div>
+
+		<!-- 设置脚本，用于加载 iframe 和进度条 -->
+		<script>
+			function loadIframe() {
+				const urlInput = document.getElementById('urlInput');
+				const contentFrame = document.getElementById('contentFrame');
+				const progressBar = document.getElementById('progressBar');
+
+				progressBar.style.display = 'block';
+				contentFrame.src = urlInput.value;
+			}
+		</script>
+	</body>
+</html>
